@@ -1,0 +1,39 @@
+Two queues:
+
+* A scheduled queue
+	Filled once every [configurable] period
+	Runs a set of commands based on the device type
+		Such as "show version" etc
+	The output is put into a file per command: group/device/command
+
+* A triggered queue
+	A syslog listener is made
+	If it receives a particular string from a device, it adds to this queue
+	It logs into that device and gets the current config
+	It then commits that config under the user found in the string
+		The user can be mapped to a user-email pair based on config
+
+Parallel running:
+
+Each queue feeds into a worker queue - triggered updates are higher priority
+	Example here: http://docs.python.org/2/library/queue.html
+
+Adding new devices:
+
+User creates new user/pass (and is told why!)
+User runs "autoexpect", turns off autopaging and runs a couple of commands
+User removes new user/pass
+User submits expect file to bug tracker
+Developer converts it into useful expect code
+
+Day One platforms:
+
+Cisco IOS
+Cisco IOS XR
+Cisco ASA
+Brocade NetIron
+Brocade BigIron
+Brocade FastIron
+JUNOS
+
+Consider also specifying model number to use more commands specific to that model
