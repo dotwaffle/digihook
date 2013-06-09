@@ -37,3 +37,7 @@ Brocade FastIron
 JUNOS
 
 Consider also specifying model number to use more commands specific to that model
+
+Some platforms (esp. JUNOS) can perform commands direct from the ssh prompt, no expect needed
+	i.e. ssh ${router} show configuration
+
