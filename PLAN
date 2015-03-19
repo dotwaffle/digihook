@@ -2,16 +2,23 @@ Two queues:
 
 * A scheduled queue
 	Filled once every [configurable] period
+	Always contains all (enabled) devices
+		Once run, re-schedules next check
 	Runs a set of commands based on the device type
 		Such as "show version" etc
+		Configurable per device, standard set of commands
 	The output is put into a file per command: group/device/command
+		Command can be named differently
+		e.g. london/r1-thn-lon/config, london/r1-thn-lon/inventory
 
 * A triggered queue
-	A syslog listener is made
+	A listener is created
+		e.g. either syslog, trap, or monitor file
 	If it receives a particular string from a device, it adds to this queue
 	It logs into that device and gets the current config
 	It then commits that config under the user found in the string
 		The user can be mapped to a user-email pair based on config
+		This will allow you to track who did what, when
 
 Parallel running:
 
@@ -25,6 +32,7 @@ User runs "autoexpect", turns off autopaging and runs a couple of commands
 User removes new user/pass
 User submits expect file to bug tracker
 Developer converts it into useful expect code
+	Optionally creating a loop of "run commands in this array"
 
 Day One platforms:
 
@@ -32,12 +40,12 @@ Cisco IOS
 Cisco IOS XR
 Cisco ASA
 Brocade NetIron
-Brocade BigIron
 Brocade FastIron
 JUNOS
+Arista EOS
 
 Consider also specifying model number to use more commands specific to that model
 
 Some platforms (esp. JUNOS) can perform commands direct from the ssh prompt, no expect needed
 	i.e. ssh ${router} show configuration
-
+	By default, login and screenscrape though... Due to "max logins per minute" etc
