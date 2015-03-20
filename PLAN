@@ -49,3 +49,8 @@ Consider also specifying model number to use more commands specific to that mode
 Some platforms (esp. JUNOS) can perform commands direct from the ssh prompt, no expect needed
 	i.e. ssh ${router} show configuration
 	By default, login and screenscrape though... Due to "max logins per minute" etc
+
+Future features:
+
+Excludes
+	regexes of things to exclude, such as byte counters, timers etc.
