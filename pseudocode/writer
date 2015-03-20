@@ -1,0 +1,14 @@
+Takes three arguments
+	group
+	device
+	config array pointer
+
+Writes each config item to files
+
+Calls "commit"
+
+Calls "push" if configured (for backup etc)
+
+Calls "hook" if configured (to update monitoring etc)
+
+Passes success/fail back, and errors.

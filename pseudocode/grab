@@ -1,0 +1,29 @@
+Accept three arguments:
+	group
+	device
+	pointer to array for config storage
+
+spawn an expect
+	set username as per configuration
+	send password when prompted, ignore MOTD, mask password
+	put entire conversation into debug file, if requested
+		don't store the debug log in the RCS
+
+expect a prompt
+	set by regex in deviceclass
+
+run before_commands
+	such as "terminal length 0" etc
+
+run commands
+	such as "show running-config" etc
+	each command goes into a separate array entry
+
+run after-commands
+	such as "terminal length 20" if you're on one of the dumb platforms that persists this across sessions.
+
+run logout
+	cleanly logout rather than just dropping the session
+	expect EOF -- if we don't receive it, logout again (some platforms exit enable then exit the cli)
+
+return success/error to parent

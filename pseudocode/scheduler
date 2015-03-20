@@ -1,0 +1,18 @@
+On startup, schedules collection of all devices immediately (if enabled)
+
+During collection, mark device as busy in array.
+
+On completion, add device into schedule -- maybe in 60 minutes, configurable
+	Including when it fails
+	Then mark device as not busy
+
+If a triggered update, add to scheduler queue at time.Now()
+	This doesn't mean the head, this means it is being scheduled and is due now.
+
+If workers < maxworkers then spawn a grabber, otherwise skip to the end.
+
+When worker completed, pass to writer who serializes array to disk, and commits. Optionally, pushes or hooks.
+
+When worker completes, check scheduler to see if there's anything "due" (i.e. before time.Now() so "due")
+
+Scheduler process runs every minute (?) to see if anything is "due".

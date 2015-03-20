@@ -1,0 +1,13 @@
+This is for triggered updates.
+
+Configurable:
+	Listens for TCP/UDP syslog entries
+	Listens for TCP/UDP snmp traps
+	Polls (if available) for "last updated config" snmp value
+	Watches a file
+
+Passes through a filter to detect what has updated (whether it's noise or an actual update)
+
+Add an entry to the schedule if needed
+
+Blocks early, blocks often.
